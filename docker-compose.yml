@@ -1,0 +1,17 @@
+# Midnight toolchain for the PrivatePay project.
+# Proof server: https://github.com/midnight-ntwrk/midnight-proof-server
+# Compiler image: https://hub.docker.com/r/midnightnetwork/compact-compiler
+
+services:
+  proof-server:
+    image: midnightnetwork/midnight-proof-server:latest
+    ports:
+      - "6300:6300"
+    environment:
+      PROOF_SERVER_PORT: 6300
+
+  compiler:
+    image: midnightnetwork/compact-compiler:latest
+    volumes:
+      - ./contracts:/contracts
+      - ./build:/build

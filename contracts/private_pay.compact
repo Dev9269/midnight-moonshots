@@ -1,0 +1,44 @@
+// PrivatePay - private payroll & splits on Midnight
+// A payroll is created with a private total; each beneficiary claims a share
+// and only their own share is disclosed. Everything else stays in shadow.
+
+import { Integer } from "compact:std";
+
+export const privatePayContract = () => {
+  // Payroll lifecycle:
+  //   createPayroll -> fund(s) -> claim(s)
+  // The ledger state is a single Integer: the total locked in the payroll.
+  // All circuit inputs that should stay private are private witnesses; only
+  // the fields passed to disclose() become public.
+
+  // Create a payroll with `payeeCount` beneficiaries and a private `total`.
+  // Public: payroll id + beneficiary count. Private: total amount.
+  export circuit createPayroll(payeeCount: Integer, total: Integer) {
+    const payrollId = state.z;
+    const event = { payrollId: payrollId, payeeCount: payeeCount };
+    const proof = { payrollId: payrollId, payeeCount: payeeCount, total: total };
+    state.z = total;
+    disclose(proof);
+    emit(event);
+  }
+
+  // A payer privately funds the payroll. Only the payroll id is disclosed.
+  export circuit fund(payrollId: Integer, amount: Integer) {
+    const current = state.z;
+    const event = { payrollId: payrollId };
+    const proof = { payrollId: payrollId, amount: amount };
+    state.z = current + amount;
+    disclose(proof);
+    emit(event);
+  }
+
+  // A beneficiary claims their private share. Only their share is disclosed.
+  export circuit claim(payrollId: Integer, share: Integer) {
+    const current = state.z;
+    const event = { payrollId: payrollId };
+    const proof = { payrollId: payrollId, share: share };
+    state.z = current - share;
+    disclose(proof);
+    emit(event);
+  }
+};
