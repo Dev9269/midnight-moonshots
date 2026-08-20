@@ -6,7 +6,7 @@
   "description": "PrivatePay - private payroll & splits on Midnight",
   "scripts": {
     "compile": "npx compact compile contracts/private_pay.compact --output build/private_pay",
-    "test": "node --test tests/",
+    "test": "node --test \"tests/*.test.js\"",
     "build": "vite build src/ui",
     "dev": "vite src/ui"
   },
