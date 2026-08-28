@@ -1,6 +1,5 @@
 node_modules/
-build/
+contracts/managed/
 dist/
 *.log
 .env
-privatepay-state/

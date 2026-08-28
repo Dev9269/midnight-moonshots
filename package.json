@@ -1,22 +1,17 @@
 {
   "name": "private-pay",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "private": true,
-  "description": "PrivatePay - private payroll & splits on Midnight",
+  "description": "PrivatePay - private payroll & splits on Midnight (Compact contract + dependency-free toolchain)",
   "scripts": {
-    "compile": "npx compact compile contracts/private_pay.compact --output build/private_pay",
+    "compile": "compact compile contracts/private_pay.compact contracts/managed/private_pay",
     "test": "node --test \"tests/*.test.js\"",
-    "build": "vite build src/ui",
-    "dev": "vite src/ui"
+    "check": "node scripts/check.mjs",
+    "build": "node scripts/build.mjs",
+    "demo": "node src/index.mjs"
   },
-  "dependencies": {
-    "@midnight-ntwrk/midnight-js-contracts": "^0.1.1",
-    "@midnight-ntwrk/midnight-js-utils": "^0.1.1",
-    "@midnight-ntwrk/midnight-js-leveldb": "^0.1.1",
-    "@midnight-ntwrk/midnight-js-wallet-lace": "^0.1.1"
-  },
-  "devDependencies": {
-    "vite": "^5.0.0"
+  "engines": {
+    "node": ">=22"
   }
 }

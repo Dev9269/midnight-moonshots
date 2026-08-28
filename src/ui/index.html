@@ -3,46 +3,44 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PrivatePay — private payroll on Midnight</title>
-  <style>
-    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; background: #0f1115; color: #e6e8ec; }
-    h1 { font-size: 1.4rem; }
-    .card { background: #181b21; border: 1px solid #2a2f38; border-radius: 10px; padding: 1rem; margin: 1rem 0; }
-    label { display: block; font-size: .8rem; color: #9aa3af; margin: .5rem 0 .2rem; }
-    input { width: 100%; box-sizing: border-box; padding: .4rem .5rem; border-radius: 6px; border: 1px solid #2a2f38; background: #0f1115; color: #e6e8ec; }
-    button { margin-top: .6rem; padding: .45rem 1rem; border-radius: 6px; border: 0; background: #6c5ce7; color: #fff; cursor: pointer; }
-    button:hover { background: #7d6ff0; }
-    pre { background: #0a0c10; padding: .6rem; border-radius: 6px; white-space: pre-wrap; font-size: .75rem; min-height: 3rem; }
-  </style>
+  <title>PrivatePay — private payroll &amp; splits on Midnight</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>PrivatePay 🌙</h1>
-  <p>Private payroll &amp; splits on Midnight — amounts stay private, only what you disclose becomes public.</p>
+  <main>
+    <h1>PrivatePay 🌙</h1>
+    <p class="sub">Private payroll &amp; splits on Midnight — amounts stay private, only what you <code>disclose()</code> becomes public.</p>
 
-  <div class="card">
-    <button id="connect">Connect Lace wallet</button>
-    <div id="wallet-status" style="font-size:.85rem;margin-top:.4rem">Not connected.</div>
-  </div>
+    <section class="card">
+      <button id="connect" class="primary">Connect wallet (demo)</button>
+      <div id="wallet-status" class="muted">Not connected. <em>Note:</em> this offline demo simulates the contract ledger in-browser; wire it to <code>@midnight-ntwrk/midnight-js-contracts</code> + the Lace wallet for a live DevNet run (see README).</div>
+    </section>
 
-  <div class="card">
-    <label>Payee count</label><input id="payee-count" type="number" value="1" />
-    <label>Total (private)</label><input id="total" type="number" value="100" />
-    <button id="create">Create payroll</button>
-  </div>
+    <section class="card">
+      <h2>Create payroll</h2>
+      <label>Payee count <input id="payee-count" type="number" value="3" /></label>
+      <label>Total (private, disclosed on create) <input id="total" type="number" value="1000" /></label>
+      <button id="create">Create payroll</button>
+    </section>
 
-  <div class="card">
-    <label>Payroll id</label><input id="payroll-id" type="number" value="0" />
-    <label>Fund amount (private)</label><input id="amount" type="number" value="50" />
-    <button id="fund">Fund payroll</button>
-    <label>Claim share (disclosed)</label><input id="share" type="number" value="50" />
-    <button id="claim">Claim share</button>
-  </div>
+    <section class="card">
+      <h2>Fund / claim</h2>
+      <label>Fund amount (private) <input id="amount" type="number" value="500" /></label>
+      <button id="fund">Fund payroll</button>
+      <label>Claim share (disclosed) <input id="share" type="number" value="250" /></label>
+      <button id="claim">Claim share</button>
+    </section>
 
-  <div class="card">
-    <label>Activity</label>
-    <pre id="log"></pre>
-  </div>
+    <section class="card">
+      <h2>Ledger</h2>
+      <pre id="ledger">total = 0</pre>
+    </section>
 
+    <section class="card">
+      <h2>Activity</h2>
+      <pre id="log"></pre>
+    </section>
+  </main>
   <script type="module" src="./app.js"></script>
 </body>
 </html>

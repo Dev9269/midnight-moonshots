@@ -1,0 +1,51 @@
+main {
+  max-width: 640px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: system-ui, sans-serif;
+  background: #0f1115;
+  color: #e6e8ec;
+}
+
+h1 { font-size: 1.4rem; }
+h2 { font-size: 1rem; margin: 0 0 .6rem; }
+.sub { color: #9aa3af; font-size: .9rem; margin-top: -.4rem; }
+
+.card {
+  background: #181b21;
+  border: 1px solid #2a2f38;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+label { display: block; font-size: .8rem; color: #9aa3af; margin: .5rem 0 .2rem; }
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: .4rem .5rem;
+  border-radius: 6px;
+  border: 1px solid #2a2f38;
+  background: #0f1115;
+  color: #e6e8ec;
+}
+button {
+  margin-top: .6rem;
+  padding: .45rem 1rem;
+  border-radius: 6px;
+  border: 0;
+  background: #6c5ce7;
+  color: #fff;
+  cursor: pointer;
+}
+button:hover { background: #7d6ff0; }
+pre {
+  background: #0a0c10;
+  padding: .6rem;
+  border-radius: 6px;
+  white-space: pre-wrap;
+  font-size: .75rem;
+  min-height: 3rem;
+}
+.muted { color: #9aa3af; font-size: .8rem; margin-top: .5rem; }
+code { background: #0a0c10; padding: 1px 4px; border-radius: 4px; }
