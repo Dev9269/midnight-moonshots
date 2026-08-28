@@ -27,7 +27,10 @@ jobs:
           curl --proto '=https' --tlsv1.2 -LsSf \
             https://github.com/midnightntwrk/compact/releases/latest/download/compact-installer.sh \
             | sh
+          export PATH="$HOME/.compact/bin:$PATH"
+          compact update 0.31.1
           compact --version
+          compact compile --version
 
       - name: Compile the Compact contract
         run: |
