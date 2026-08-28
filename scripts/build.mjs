@@ -15,5 +15,6 @@ mkdirSync(out, { recursive: true });
 for (const f of ["index.html", "style.css", "app.js", "app-core.js"]) {
   cpSync(join(src, f), join(out, f));
 }
+cpSync(join(root, "src", "ledger.js"), join(out, "ledger.js"));
 
 console.log(`Built dist/ from ${src}`);
