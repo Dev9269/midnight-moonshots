@@ -5,28 +5,28 @@ import CompactStandardLibrary;
 /*
  * PrivatePay - private payroll & splits on Midnight.
  *
- * A payroll is kept as a single public counter. The amounts that flow into it
- * are private circuit parameters: each party reveals (via `disclose`) only the
- * value they contribute or claim, never the full picture.
+ * A payroll is kept as a single public running total (`Uint<64>`). The amounts
+ * that flow into it are private circuit parameters: each party reveals (via
+ * `disclose`) only the value they contribute or claim, never the full picture.
  *
- *   createPayroll(total)  -> the private total is disclosed onto the ledger
- *   fund(amount)          -> payer adds a private amount (only the running total changes)
- *   claim(share)          -> beneficiary withdraws their share (asserted <= balance)
+ *   createPayroll(total)  -> the declared total is disclosed onto the ledger
+ *   fund(amount)          -> a payer adds a private amount (running total changes)
+ *   claim(share)          -> a beneficiary withdraws their share (asserted <= balance)
  *
- * The ledger's Counter type is used so that increments/decrements do not depend
- * on reading the current value - the contract only commits to the delta.
+ * Only `total` is visible on the ledger. Who funded what, and the individual
+ * contributions behind the running total, never leave the circuits.
  */
-export ledger total: Counter;
+export ledger total: Uint<64>;
 
 export circuit createPayroll(totalAmount: Uint<64>): [] {
-  total += disclose(totalAmount);
+  total = disclose(totalAmount);
 }
 
 export circuit fund(amount: Uint<64>): [] {
-  total += disclose(amount);
+  total = disclose((total + amount) as Uint<64>);
 }
 
 export circuit claim(share: Uint<64>): [] {
   assert(share <= total, "Cannot claim more than the payroll balance");
-  total -= disclose(share);
+  total = disclose((total - share) as Uint<64>);
 }

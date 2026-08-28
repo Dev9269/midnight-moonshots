@@ -17,9 +17,9 @@ fund(amount)          -> a payer adds a private amount (only the running total c
 claim(share)          -> a beneficiary withdraws their share (asserted <= balance)
 ```
 
-Because the ledger uses a `Counter`, increments and decrements commit only to
-the delta — the contract never commits to *who* funded or *what* the total
-was declared as.
+Because the ledger is a single `Uint<64>` running total, the contract commits
+only to the current balance — it never exposes *who* funded or *what* the
+individual contributions were.
 
 ## Toolchain
 

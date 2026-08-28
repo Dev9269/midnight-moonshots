@@ -44,7 +44,7 @@ test("contract source is valid Compact 0.23 (pragma + ledger + circuits)", () =>
   const src = readFileSync(join(root, "contracts", "private_pay.compact"), "utf8");
   assert.match(src, /pragma language_version 0\.23/i);
   assert.match(src, /import CompactStandardLibrary/i);
-  assert.match(src, /export ledger total: Counter/i);
+  assert.match(src, /export ledger total: Uint<64>/i);
   assert.match(src, /export circuit createPayroll/i);
   assert.match(src, /export circuit fund/i);
   assert.match(src, /export circuit claim/i);
